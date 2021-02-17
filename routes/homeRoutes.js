@@ -4,6 +4,8 @@ const router = express.Router()
 
 const homeController = require('../controllers/homeController')
 
-router.get('/home', homeController.createHome)
+router.post('/home', homeController.createHome)
+router.get('/homes', homeController.findAllhomes)
+router.get('/home/:idHome', homeController.findOneHome)
 
 module.exports = router
