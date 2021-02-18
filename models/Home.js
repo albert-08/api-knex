@@ -14,7 +14,7 @@ const create = (bodyHome) => {
 const findAll = () => {
     //Obtiene todos los registrod de la tabla HOMES
     return knex
-        .select(['title', 'house_id', 'address', 'guests', 'description', 'create_at'])
+        .select(['title', 'house_id', 'address', 'guests', 'description', 'create_at', 'active'])
         .from('homes')
 }
 
@@ -25,8 +25,33 @@ const findOne = (houseId) => {
         .where({house_id: houseId})
 }
 
+const update = (id, bodyToUpdate) => {
+    return knex
+        .update(bodyToUpdate)
+        .from('homes')
+        .where({house_id: id})
+        .returning(['title', 'house_id', 'address', 'guests', 'description', 'create_at'])
+}
+
+const destroy = (id) => {
+    return knex
+        .del()
+        .from('homes')
+        .where({house_id: id})
+}
+
+const del = (id) => {
+    return knex
+        .update({active: false})
+        .from('homes')
+        .where({house_id:id})
+}
+
 module.exports = {
     create,
     findAll,
-    findOne
+    findOne,
+    update,
+    destroy,
+    del
 }
