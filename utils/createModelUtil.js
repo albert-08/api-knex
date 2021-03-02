@@ -1,6 +1,9 @@
 //Tiena como objetivo hacer una abstracción de mis funciones
 //que solicitan la info a la base de datos.
 
+const { query } = require("express")
+const { returning } = require("../config")
+
 const createModelKnex = (knex, table,returningData, tableId) => {
     const create = (body) => {
         //Crear un registro en la tabla HOMES
@@ -17,6 +20,12 @@ const createModelKnex = (knex, table,returningData, tableId) => {
             .from(table)
     }
     
+    const find = (query) => {
+        return knex.select(returningData)
+                    .from(table)
+                    .where(query)
+    }
+
     const findOne = (id) => {
         return knex
             .select(returningData)
@@ -52,7 +61,8 @@ const createModelKnex = (knex, table,returningData, tableId) => {
         findOne,
         update,
         destroy,
-        del
+        del,
+        find
     }
 }
 
