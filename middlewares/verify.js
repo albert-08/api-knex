@@ -1,6 +1,6 @@
 const JWT = require('jsonwebtoken')
 const UserModel = require('../models/User')
-const SECRET_KEY = 'iw6bPfybFfqGhXpV3DK8LqvYnfe3GDVJBVCgC2HmgD2SEoXK1oj+/82ykWpKt26CjseAG+UCmzL6asUrmIpw1bYxDjhlIPMlS4wQtZz17yPI/O4UOqeGfhl9wX8UYmTWfyo='
+const SECRET_KEY = process.env.SECRET_KEY
 
 module.exports = async (req,res,next) => {
     const Authorization = req.get('Authorization')
